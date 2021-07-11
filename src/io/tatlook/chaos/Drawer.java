@@ -279,7 +279,10 @@ public class Drawer extends JComponent implements Runnable {
 	public void setImageSize(int size) {
 		imageWidth = imageHeight = zoom = size;
 		intoMiddle();
-		clean();
+		Image originalImage = image;
+		image = createImage(imageWidth, imageHeight);
+		image.getGraphics().drawImage(originalImage, 0, 0, imageWidth, imageHeight, this);
+		repaint();
 	}
 	
 	public int getImageSize() {
