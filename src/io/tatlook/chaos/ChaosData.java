@@ -92,13 +92,9 @@ public class ChaosData {
 	}
 	
 	public void addRule() {
-		Double[] dx = new Double[3];
-		Double[] dy = new Double[3];
-		for (int i = 0; i < dy.length; i++) {
-			dx[i] = 0.0;
-			dy[i] = 0.0;
-		}
-		addRule(0.0, dx, dy);
+		Double[] cx = { 0.0, 0.0, 0.0 };
+		Double[] cy = { 0.0, 0.0, 0.0 };
+		addRule(0.0, cx, cy);
 	}
 	
 	public void removeRule(int index) {
