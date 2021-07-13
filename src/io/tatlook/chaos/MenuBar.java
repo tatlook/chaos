@@ -26,12 +26,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ButtonGroup;
 import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
 
 import io.tatlook.chaos.MainWindow.MainWindowListener;
 import io.tatlook.chaos.parser.NullFileParser;
@@ -134,44 +132,18 @@ public class MenuBar extends JMenuBar {
 		JMenuItem cleanImageMenuItem = new JMenuItem("Clean Display");
 		JMenuItem intoMiddleMenuItem = new JMenuItem("Into the Middle");
 		JMenuItem chooseColorMenuItem = new JMenuItem("Select Color");
-		JMenu imageSizeMenu = new JMenu("Image Size");
+		JMenuItem imageConfigurationMenuItem = new JMenuItem("Image Configuration");
 		JMenuItem fullScreenMenuItem = new JMenuItem("Full Screen (F11)");
 		cleanImageMenuItem.setMnemonic('C');
-		intoMiddleMenuItem.setMnemonic('I');
+		intoMiddleMenuItem.setMnemonic('M');
 		chooseColorMenuItem.setMnemonic('O');
-		imageSizeMenu.setMnemonic('S');
+		imageConfigurationMenuItem.setMnemonic('I');
 		fullScreenMenuItem.setMnemonic('F');
-		
-		ButtonGroup imageSizeButtonGroup = new ButtonGroup();
-		@SuppressWarnings("serial")
-		class ImageSizeRadioButtonMenuItem extends JRadioButtonMenuItem {
-			public ImageSizeRadioButtonMenuItem(int size, boolean selected) {
-				super(size + "×" + size, selected);
-				imageSizeButtonGroup.add(this);
-				imageSizeMenu.add(this);
-				addChangeListener((e) -> {
-					if (isSelected()) {
-						App.mainWindow.getDrawer().setImageSize(size);
-					}
-				});
-			}
-			public ImageSizeRadioButtonMenuItem(int size) {
-				this(size, false);
-			}
-		}
-		
-		new ImageSizeRadioButtonMenuItem(300);
-		new ImageSizeRadioButtonMenuItem(500);
-		new ImageSizeRadioButtonMenuItem(1000);
-		new ImageSizeRadioButtonMenuItem(2000);
-		new ImageSizeRadioButtonMenuItem(3000, true);
-		new ImageSizeRadioButtonMenuItem(4000);
-		new ImageSizeRadioButtonMenuItem(5000);
 		
 		viewMenu.add(cleanImageMenuItem);
 		viewMenu.add(intoMiddleMenuItem);
 		viewMenu.add(chooseColorMenuItem);
-		viewMenu.add(imageSizeMenu);
+		viewMenu.add(imageConfigurationMenuItem);
 		viewMenu.addSeparator();
 		viewMenu.add(fullScreenMenuItem);
 		
@@ -185,6 +157,9 @@ public class MenuBar extends JMenuBar {
 			if (color != null) {
 				App.mainWindow.getDrawer().setPenColor(color);				
 			}
+		});
+		imageConfigurationMenuItem.addActionListener((e) -> {
+			new ImageConfigurationDialog().setVisible(true);
 		});
 		fullScreenMenuItem.addActionListener((e) -> {
 			App.mainWindow.fullScreen();
