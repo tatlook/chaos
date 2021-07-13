@@ -46,8 +46,8 @@ public class ImageConfigurationDialog extends JDialog {
 	class ImageInfo {
 		int size;
 		double paintingZoom;
-		int xOffset;
-		int yOffset;
+		double xOffset;
+		double yOffset;
 		public ImageInfo() {
 			Drawer drawer = App.mainWindow.getDrawer();
 			size = drawer.getImageSize();
@@ -128,15 +128,15 @@ public class ImageConfigurationDialog extends JDialog {
 			}
 			info.paintingZoom = v;
 		}));
-		box.add(new ParameterPanel("X Offset", new Integer[] {
-				-1500, -1000, -500, 0, 500, 1000, 1500
+		box.add(new ParameterPanel("X Offset", new Double[] {
+				-0.5, -0.25, 0.0, 0.25, 0.5
 		}, info.xOffset, (value) -> {
-			info.xOffset = Integer.parseInt(value);
+			info.xOffset = Double.parseDouble(value);
 		}));
-		box.add(new ParameterPanel("Y Offset", new Integer[] {
-				-1500, -1000, -500, 0, 500, 1000, 1500
+		box.add(new ParameterPanel("Y Offset", new Double[] {
+				-0.5, -0.25, 0.0, 0.25, 0.5
 		}, info.yOffset, (value) -> {
-			info.yOffset = Integer.parseInt(value);
+			info.yOffset = Double.parseDouble(value);
 		}));
 		
 		this.panel.add(box , BorderLayout.CENTER);

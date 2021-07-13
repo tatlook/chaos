@@ -66,9 +66,9 @@ public class Drawer extends JComponent implements Runnable {
 	
 	private boolean hasChange = true;
 
-	private double paintingZoom = 1;
-	private int xOffset = 0;
-	private int yOffset = 0;
+	private double paintingZoom = 1.0;
+	private double xOffset = 0.0;
+	private double yOffset = 0.0;
 	
 	public Drawer() {
 		// Kuva suurennee/pienennee, kun paina Ctrl++/Ctrl+-
@@ -212,10 +212,12 @@ public class Drawer extends JComponent implements Runnable {
 				x = x0; 
 				y = y0; 
 				
-				x0 *= imageWidth * paintingZoom;
-				y0 *= imageHeight * paintingZoom;
+				x0 *= paintingZoom;
+				y0 *= paintingZoom;
 				x0 += xOffset;
 				y0 -= yOffset;
+				x0 *= imageWidth;
+				y0 *= imageHeight;
 				// Pirtään kuvassa
 				g.drawLine((int)x0, imageHeight - (int)y0, (int)x0, imageHeight - (int)y0);
 			}
@@ -315,25 +317,25 @@ public class Drawer extends JComponent implements Runnable {
 		return paintingZoom;
 	}
 
-	public void setXOffset(int xOffset) {
+	public void setXOffset(double xOffset) {
 		this.xOffset = xOffset;
 	}
 
-	public void setYOffset(int yOffset) {
+	public void setYOffset(double yOffset) {
 		this.yOffset = yOffset;
 	}
 
 	/**
 	 * @return the xOffset
 	 */
-	public int getXOffset() {
+	public double getXOffset() {
 		return xOffset;
 	}
 
 	/**
 	 * @return the yOffset
 	 */
-	public int getYOffset() {
+	public double getYOffset() {
 		return yOffset;
 	}
 }
