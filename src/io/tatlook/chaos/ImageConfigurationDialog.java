@@ -117,16 +117,16 @@ public class ImageConfigurationDialog extends JDialog {
 		box.add(new ParameterPanel("Image Size", new Integer[] {
 				300, 500, 1000, 2000, 3000, 4000, 5000
 		}, info.size, (value) -> {
-			info.size = Integer.parseInt(value);
+			int v = Integer.parseInt(value);
+			if (v < 0) {
+				throw new NumberFormatException();
+			}
+			info.size = v;
 		}));
 		box.add(new ParameterPanel("Painting Zoom", new Double[] {
 				0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75
 		}, info.paintingZoom, (value) -> {
-			double v = Double.parseDouble(value);
-			if (v < 0) {
-				throw new NumberFormatException();
-			}
-			info.paintingZoom = v;
+			info.paintingZoom = Double.parseDouble(value);
 		}));
 		box.add(new ParameterPanel("X Offset", new Double[] {
 				-0.5, -0.25, 0.0, 0.25, 0.5
