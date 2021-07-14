@@ -44,7 +44,7 @@ public class ChaosFileChooser {
 	public ChaosFileChooser() {
 	}
 
-	public void chose() {
+	public void choose() {
 		JFileChooser fileChooser = new JFileChooser();
 		
 		fileChooser.setCurrentDirectory(manager.getStartDirectory());

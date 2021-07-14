@@ -30,7 +30,7 @@ public class ImageFileChooser {
 	private static final StartDirectoryManager manager = new StartDirectoryManager("imagechoosedefault");
 	private String imageType;
 	private File imageFile;
-	public void chose() {
+	public void choose() {
 		JFileChooser fileChooser = new JFileChooser();
 		
 		fileChooser.setCurrentDirectory(manager.getStartDirectory());

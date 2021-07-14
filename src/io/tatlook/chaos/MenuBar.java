@@ -90,7 +90,7 @@ public class MenuBar extends JMenuBar {
 			ChaosFileSaver.checkFileSave();
 			
 			ChaosFileChooser fileChooser = new ChaosFileChooser();
-			fileChooser.chose();
+			fileChooser.choose();
 			File file = fileChooser.getChaosFile();
 			if (file == null || !file.exists() || !file.canRead()) {
 				return;
@@ -103,7 +103,7 @@ public class MenuBar extends JMenuBar {
 		});
 		saveImageMenuItem.addActionListener((e) -> {
 			ImageFileChooser fileChooser = new ImageFileChooser();
-			fileChooser.chose();
+			fileChooser.choose();
 			File file = fileChooser.getImageFile();
 			if (file == null) {
 				return;
