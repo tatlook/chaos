@@ -15,6 +15,76 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+/******************************************************************************
+ *  Compilation:  javac StdArrayIO.java
+ *  Execution:    java StdArrayIO < input.txt
+ *  Dependencies: StdOut.java
+ *  Data files:    https://introcs.cs.princeton.edu/java/22library/tinyDouble1D.txt
+ *                 https://introcs.cs.princeton.edu/java/22library/tinyDouble2D.txt
+ *                 https://introcs.cs.princeton.edu/java/22library/tinyBoolean2D.txt
+ *
+ *  A library for reading in 1D and 2D arrays of integers, doubles,
+ *  and booleans from standard input and printing them out to
+ *  standard output.
+ *
+ *  % more tinyDouble1D.txt 
+ *  4
+ *    .000  .246  .222  -.032
+ *
+ *  % more tinyDouble2D.txt 
+ *  4 3 
+ *    .000  .270  .000 
+ *    .246  .224 -.036 
+ *    .222  .176  .0893 
+ *   -.032  .739  .270 
+ *
+ *  % more tinyBoolean2D.txt 
+ *  4 3 
+ *    1 1 0
+ *    0 0 0
+ *    0 1 1
+ *    1 1 1
+ *
+ *  % cat tinyDouble1D.txt tinyDouble2D.txt tinyBoolean2D.txt | java StdArrayIO
+ *  4
+ *    0.00000   0.24600   0.22200  -0.03200 
+ *  
+ *  4 3
+ *    0.00000   0.27000   0.00000 
+ *    0.24600   0.22400  -0.03600 
+ *    0.22200   0.17600   0.08930 
+ *    0.03200   0.73900   0.27000 
+ *
+ *  4 3
+ *  1 1 0 
+ *  0 0 0 
+ *  0 1 1 
+ *  1 1 1 
+ *
+ ******************************************************************************/
+/******************************************************************************
+ *  Copyright 2002-2019, Robert Sedgewick and Kevin Wayne.
+ *
+ *  This file is part of algs4.jar, which accompanies the textbook
+ *
+ *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
+ *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
+ *      http://algs4.cs.princeton.edu
+ *
+ *
+ *  algs4.jar is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  algs4.jar is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
+ ******************************************************************************/
 
 package io.tatlook.chaos.parser;
 
