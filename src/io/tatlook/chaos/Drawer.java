@@ -97,8 +97,6 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JComponent;
 
-import edu.princeton.cs.algs4.StdRandom;
-
 /**
  * @author Administrator
  *
@@ -333,7 +331,7 @@ public class Drawer extends JComponent implements Runnable {
 			if (sumb == 0.0) {
 				return 0;
 			}
-			double r = StdRandom.uniform(0.0, sumb);
+			double r = Math.random() * sumb;
 			for (int i = 0; i < probabilities.length; i++) {
 				sum = sum + probabilities[i];
 				if (sum > r) return i;
