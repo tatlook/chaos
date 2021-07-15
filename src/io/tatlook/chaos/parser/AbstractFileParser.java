@@ -21,6 +21,7 @@ package io.tatlook.chaos.parser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Locale;
 import java.util.Scanner;
 
 import io.tatlook.chaos.ChaosData;
@@ -42,6 +43,7 @@ public abstract class AbstractFileParser {
 		chaosFile = file;
 		inputStream = new FileInputStream(file);
 		scanner = new Scanner(inputStream);
+		scanner.useLocale(Locale.US);
 		currentFileParser = this;
 	}
 	
