@@ -54,8 +54,8 @@ public class ChaosFileChooser {
 		
 		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Plain Text(*.txt)", "txt"));
 		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Fractint IFS File(*.ifs)", "ifs"));
-		fileChooser.setFileFilter(new FileNameExtensionFilter("Chaos File(*.ch)", "ch"));
-		
+		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Chaos File(*.ch)", "ch"));
+		fileChooser.setFileFilter(new FileNameExtensionFilter("All Supported Files", "ch", "ifs", "txt"));
 		
 		int result;
 		if (dialogMode == JFileChooser.OPEN_DIALOG) {
