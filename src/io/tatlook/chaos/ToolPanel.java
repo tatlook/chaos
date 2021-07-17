@@ -136,64 +136,51 @@ public class ToolPanel extends JPanel {
 		private Border border;
 		private JButton deleteButton = new JButton("✕");
 		
-		private Double parseFieldValue(JTextField textField, boolean negative) throws NumberFormatException {
-			Double value;
-			try {
-				value = Double.parseDouble(textField.getText());
-				if ((!negative) && value < 0) {
-					throw new NumberFormatException();
-				}
-				textField.setBorder(new JTextField().getBorder());
-			} catch (NumberFormatException e) {
-				textField.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 255), 3));
-				throw e;
-			}
-			
-			return value;
-		}
-		
-		public RulePanel() {
-			super(new BorderLayout());
-			
-			abstract class DocumentAdapter implements DocumentListener {
-				@Override
-				public void removeUpdate(DocumentEvent e) {
-					changedUpdate(e);
-				}
-				
-				@Override
-				public void insertUpdate(DocumentEvent e) {
-					changedUpdate(e);
-				}
-			}
-			
+		class EditTextField extends JTextField {
 			final int fieldMinimumWidth = 100;
 			final int fieldMaximumHeight = 22;
-			{
-				JLabel label = new JLabel("Possibility");
-				JTextField textField = new JTextField("" + ChaosData.current.getDist()[panelIndex]);
-				addListeners(textField);
-				textField.setMaximumSize(new Dimension(textField.getMaximumSize().width, fieldMaximumHeight));
-				textField.getDocument().addUndoableEditListener(new UndoManager());
-				textField.getDocument().addDocumentListener(new DocumentAdapter() {
+			
+			public EditTextField(String value, SetRunnable doSet) {
+				super(value);
+				
+				setMinimumSize(new Dimension(fieldMinimumWidth, 0));
+				setMaximumSize(new Dimension(getMaximumSize().width, fieldMaximumHeight));
+			
+				addListeners(this);
+				getDocument().addDocumentListener(new DocumentListener() {
+					@Override
+					public void removeUpdate(DocumentEvent e) {
+						changedUpdate(e);
+					}
+					
+					@Override
+					public void insertUpdate(DocumentEvent e) {
+						changedUpdate(e);
+					}
+					
 					@Override
 					public void changedUpdate(DocumentEvent e) {
-						Double value;
 						try {
-							value = parseFieldValue(textField, false);
+							doSet.set(getText());
+							setBorder(new JTextField().getBorder());
 						} catch (NumberFormatException e2) {
+							setBorder(BorderFactory.createLineBorder(new Color(180, 180, 255), 3));
 							return;
 						}
-						Vector<Double> vector = ChaosData.current.getDistVector();
-						Double dists = vector.get(panelIndex);
-						dists = value;
-						vector.set(panelIndex, dists);
 						App.mainWindow.getDrawer().setChange();
 						ChaosData.current.setChanged(true);
 					}
 				});
-				deleteButton.setMaximumSize(new Dimension(fieldMaximumHeight, fieldMaximumHeight));
-				deleteButton.setSize(fieldMaximumHeight, fieldMaximumHeight);
+			}
+		};
+		
+		public RulePanel() {
+			super(new BorderLayout());
+			
+			{
+				final int buttonMaximum = 22;
+				deleteButton.setMaximumSize(new Dimension(buttonMaximum, buttonMaximum));
+				deleteButton.setSize(buttonMaximum, buttonMaximum);
 				deleteButton.addActionListener((e) -> {
 					if (rulePanels.size() <= 0) {
 						throw new AssertionError();
@@ -218,9 +205,18 @@ public class ToolPanel extends JPanel {
 				});
 				
 				Box box = Box.createHorizontalBox();
-				box.add(label);
+				box.add(new JLabel("Possibility"));
 				box.add(createSpacing());
-				box.add(textField);
+				box.add(new EditTextField("" + ChaosData.current.getDist()[panelIndex], (value) -> {
+					Double value2 = Double.valueOf(value);
+					if (value2 < 0) {
+						throw new NumberFormatException();
+					}
+					Vector<Double> vector = ChaosData.current.getDistVector();
+					Double dists = vector.get(panelIndex);
+					dists = value2;
+					vector.set(panelIndex, dists);
+				}));
 				box.add(createSpacing());
 				box.add(deleteButton);
 				box.add(createSpacing());
@@ -228,70 +224,38 @@ public class ToolPanel extends JPanel {
 				add(box, BorderLayout.NORTH);
 			}
 			{
-				Box xBox = Box.createHorizontalBox();
-				JLabel label = new JLabel("CX");
-				xBox.add(label);
+				Box box = Box.createHorizontalBox();
+				box.add(new JLabel("CX"));
 				for (int i = 0; i < 3; i++) {
-					JTextField field = new JTextField("" + ChaosData.current.getCX()[panelIndex][i]);
-					addListeners(field);
-					field.setMinimumSize(new Dimension(fieldMinimumWidth, 0));
-					field.setMaximumSize(new Dimension(field.getMaximumSize().width, fieldMaximumHeight));
 					final int theI = i;
-					field.getDocument().addDocumentListener(new DocumentAdapter() {
-						@Override
-						public void changedUpdate(DocumentEvent e) {
-							Double value;
-							try {
-								value = parseFieldValue(field, true);
-							} catch (NumberFormatException e2) {
-								return;
-							}
-							Vector<Double[]> vector = ChaosData.current.getCXVector();
-							Double[] cxs = vector.get(panelIndex);
-							cxs[theI] = value;
-							vector.set(panelIndex, cxs);
-							App.mainWindow.getDrawer().setChange();
-							ChaosData.current.setChanged(true);
-						}
-					});
-					xBox.add(createSpacing());
-					xBox.add(field);
+					box.add(createSpacing());
+					box.add(new EditTextField("" + ChaosData.current.getCX()[panelIndex][i], (value) -> {
+						Double value2 = Double.valueOf(value);
+						Vector<Double[]> vector = ChaosData.current.getCXVector();
+						Double[] cxs = vector.get(panelIndex);
+						cxs[theI] = value2;
+						vector.set(panelIndex, cxs);
+					}));
 				}
-				xBox.setBorder(STD_SPACING_BORDER);
-				add(xBox);
+				box.setBorder(STD_SPACING_BORDER);
+				add(box);
 			}
 			{
-				Box yBox = Box.createHorizontalBox();
-				JLabel label = new JLabel("CY");
-				yBox.add(label);
+				Box box = Box.createHorizontalBox();
+				box.add(new JLabel("CY"));
 				for (int i = 0; i < 3; i++) {
-					JTextField field = new JTextField("" + ChaosData.current.getCY()[panelIndex][i]);
-					addListeners(field);
-					field.setMinimumSize(new Dimension(fieldMinimumWidth, 0));
-					field.setMaximumSize(new Dimension(field.getMaximumSize().width, fieldMaximumHeight));
 					final int theI = i;
-					field.getDocument().addDocumentListener(new DocumentAdapter() {
-						@Override
-						public void changedUpdate(DocumentEvent e) {
-							Double value;
-							try {
-								value = parseFieldValue(field, true);
-							} catch (NumberFormatException e2) {
-								return;
-							}
-							Vector<Double[]> vector = ChaosData.current.getCYVector();
-							Double[] cys = vector.get(panelIndex);
-							cys[theI] = value;
-							vector.set(panelIndex, cys);
-							App.mainWindow.getDrawer().setChange();
-							ChaosData.current.setChanged(true);
-						}
-					});
-					yBox.add(createSpacing());
-					yBox.add(field);
+					box.add(createSpacing());
+					box.add(new EditTextField("" + ChaosData.current.getCY()[panelIndex][i], (value) -> {
+						Double value2 = Double.valueOf(value);
+						Vector<Double[]> vector = ChaosData.current.getCYVector();
+						Double[] cxs = vector.get(panelIndex);
+						cxs[theI] = value2;
+						vector.set(panelIndex, cxs);
+					}));
 				}
-				yBox.setBorder(STD_SPACING_BORDER);
-				add(yBox, BorderLayout.SOUTH);
+				box.setBorder(STD_SPACING_BORDER);
+				add(box, BorderLayout.SOUTH);
 			}
 			System.out.print(rulePanels.size());
 		}

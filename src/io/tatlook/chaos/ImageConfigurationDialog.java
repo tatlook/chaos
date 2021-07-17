@@ -68,11 +68,6 @@ public class ImageConfigurationDialog extends JDialog {
 		createConfirmButton();
 	}
 	
-	@FunctionalInterface
-	interface SetRunnable {
-		public void set(String value) throws NumberFormatException;
-	}
-	
 	@SuppressWarnings("serial")
 	class ParameterPanel extends JPanel {
 		private JComboBox<? extends Number> comboBox;
