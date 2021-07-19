@@ -215,7 +215,7 @@ public class MainWindow extends JFrame {
 					}
 					fullScreen();
 				}
-				return false;
+				return true;
 			}
 		});
 	}

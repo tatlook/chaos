@@ -146,8 +146,10 @@ public class Drawer extends JComponent implements Runnable {
 			}
 			if (e.getKeyCode() == KeyEvent.VK_PLUS) {
 				zoom(-1, getWidth() / 2, getHeight() / 2);
+				return true;
 			} else if (e.getKeyCode() == KeyEvent.VK_MINUS) {
 				zoom(1, getWidth() / 2, getHeight() / 2);
+				return true;
 			}
 			return false;
 		});
