@@ -35,7 +35,8 @@ public class App {
 			if (args.length > 0) {
 				File file = new File(args[0]);
 				if (file.exists()) {
-					new ChaosFileParser(file);
+					ChaosFileChooser.chooseAvailableParser(file);
+					FileHistoryManager.get().add(file);
 				} else {
 					if (args[0].charAt(0) == '-') {
 						JOptionPane.showMessageDialog(
