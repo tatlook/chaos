@@ -42,13 +42,15 @@ public class App {
 								mainWindow,
 								"This program doesn't have command-line options"
 						);
+						new NullFileParser();
 					} else {
 						// = Throw new FileNotFoundException.
 						new ChaosFileParser(file);
 					}
 				}
+			} else {
+				new NullFileParser();
 			}
-			new NullFileParser();
 		} catch (FileNotFoundException e) {
 			ErrorMessageDialog.createExceptionDialog(e);
 			new NullFileParser();
