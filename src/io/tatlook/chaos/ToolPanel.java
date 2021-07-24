@@ -212,10 +212,7 @@ public class ToolPanel extends JPanel {
 					if (value2 < 0) {
 						throw new NumberFormatException();
 					}
-					Vector<Double> vector = ChaosData.current.getDistVector();
-					Double dists = vector.get(panelIndex);
-					dists = value2;
-					vector.set(panelIndex, dists);
+					ChaosData.current.getDistVector().set(panelIndex, value2);
 				}));
 				box.add(createSpacing());
 				box.add(deleteButton);
@@ -230,11 +227,7 @@ public class ToolPanel extends JPanel {
 					final int theI = i;
 					box.add(createSpacing());
 					box.add(new EditTextField("" + ChaosData.current.getCX()[panelIndex][i], (value) -> {
-						Double value2 = Double.valueOf(value);
-						Vector<Double[]> vector = ChaosData.current.getCXVector();
-						Double[] cxs = vector.get(panelIndex);
-						cxs[theI] = value2;
-						vector.set(panelIndex, cxs);
+						ChaosData.current.getCXVector().get(panelIndex)[theI] = Double.valueOf(value);
 					}));
 				}
 				box.setBorder(STD_SPACING_BORDER);
@@ -247,11 +240,7 @@ public class ToolPanel extends JPanel {
 					final int theI = i;
 					box.add(createSpacing());
 					box.add(new EditTextField("" + ChaosData.current.getCY()[panelIndex][i], (value) -> {
-						Double value2 = Double.valueOf(value);
-						Vector<Double[]> vector = ChaosData.current.getCYVector();
-						Double[] cxs = vector.get(panelIndex);
-						cxs[theI] = value2;
-						vector.set(panelIndex, cxs);
+						ChaosData.current.getCYVector().get(panelIndex)[theI] = Double.valueOf(value);
 					}));
 				}
 				box.setBorder(STD_SPACING_BORDER);
