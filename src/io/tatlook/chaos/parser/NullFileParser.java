@@ -32,7 +32,7 @@ public class NullFileParser extends AbstractFileParser {
 	}
 	
 	@Override
-	public void readChaos() {
+	public void parse() {
 		data = new ChaosData();
 		ChaosData.current = data;
 	}

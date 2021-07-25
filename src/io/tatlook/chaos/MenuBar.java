@@ -79,7 +79,7 @@ public class MenuBar extends JMenuBar {
 				return;
 			} 
 			
-			new NullFileParser().readChaos();
+			new NullFileParser().parse();
 			App.mainWindow.updateToolPanel();
 			App.mainWindow.getDrawer().setChange();
 		});

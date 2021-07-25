@@ -147,7 +147,7 @@ public class ChaosFileParser extends AbstractFileParser {
 		return a;
 	}
 	
-	public void readChaos() throws ChaosFileDataException {
+	public void parse() throws ChaosFileDataException {
 		data = new ChaosData(readDouble1D(),
 				readDouble2D(),
 				readDouble2D());

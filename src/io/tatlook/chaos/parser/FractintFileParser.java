@@ -84,7 +84,7 @@ public class FractintFileParser extends AbstractFileParser {
 	}
 	
 	@Override
-	public void readChaos() throws ChaosFileDataException {
+	public void parse() throws ChaosFileDataException {
 		data = new ChaosData(new double[0], new double[0][0], new double[0][0]);
 		try {
 			while (true) {
