@@ -20,7 +20,7 @@ package io.tatlook.chaos;
 
 import java.util.Vector;
 
-import io.tatlook.chaos.parser.ChaosFileParser;
+import io.tatlook.chaos.parser.AbstractFileParser;
 
 /**
  * @author Administrator
@@ -92,7 +92,7 @@ public class ChaosData {
 		}
 		this.changed = changed;
 		if (thischanged != changed) {
-			App.mainWindow.setTitle(ChaosFileParser.getCurrentFileParser().getFile());
+			App.mainWindow.setTitle(AbstractFileParser.getCurrentFileParser().getFile());
 		}
 	}
 	

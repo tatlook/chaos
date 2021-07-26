@@ -33,7 +33,7 @@ import javax.swing.JMenuItem;
 
 import io.tatlook.chaos.MainWindow.MainWindowListener;
 import io.tatlook.chaos.parser.NullFileParser;
-import io.tatlook.chaos.saver.ChaosFileSaver;
+import io.tatlook.chaos.saver.AbstractFileSaver;
 
 /**
  * @author Administrator
@@ -75,7 +75,7 @@ public class MenuBar extends JMenuBar {
 		fileMenu.add(exitMenuItem);
 		
 		newMenuItem.addActionListener((e) -> {
-			if (ChaosFileSaver.checkFileSave() == false) {
+			if (AbstractFileSaver.checkFileSave() == false) {
 				return;
 			} 
 			
@@ -84,10 +84,10 @@ public class MenuBar extends JMenuBar {
 			App.mainWindow.getDrawer().setChange();
 		});
 		saveMenuItem.addActionListener((e) -> {
-			ChaosFileSaver.staticSave();
+			AbstractFileSaver.staticSave();
 		});
 		openMenuItem.addActionListener((e) -> {
-			ChaosFileSaver.checkFileSave();
+			AbstractFileSaver.checkFileSave();
 			
 			ChaosFileChooser fileChooser = new ChaosFileChooser();
 			fileChooser.choose();

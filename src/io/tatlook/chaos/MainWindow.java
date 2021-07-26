@@ -35,8 +35,8 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
 
-import io.tatlook.chaos.parser.ChaosFileParser;
-import io.tatlook.chaos.saver.ChaosFileSaver;
+import io.tatlook.chaos.parser.AbstractFileParser;
+import io.tatlook.chaos.saver.AbstractFileSaver;
 
 /**
  * @author Administrator
@@ -77,7 +77,7 @@ public class MainWindow extends JFrame {
 			} else if (result == JOptionPane.NO_OPTION || result == JOptionPane.CLOSED_OPTION) {
 				System.exit(0);
 			} else if (result == JOptionPane.YES_OPTION) {
-				if (ChaosFileSaver.staticSave() == true) {
+				if (AbstractFileSaver.staticSave() == true) {
 					System.exit(0);
 				} else {
 					frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -122,7 +122,7 @@ public class MainWindow extends JFrame {
 	public void updateToolPanel() {
 		toolPanel = new ToolPanel();
 		splitPane.setLeftComponent(toolPanel);
-		setTitle(ChaosFileParser.getCurrentFileParser().getFile());
+		setTitle(AbstractFileParser.getCurrentFileParser().getFile());
 	}
 	
 	public void setTitle(File file) {
