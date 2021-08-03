@@ -23,8 +23,9 @@ import java.util.Vector;
 import io.tatlook.chaos.parser.AbstractFileParser;
 
 /**
- * @author Administrator
- *
+ * Data of iterated function system.
+ * 
+ * @author YouZhe Zhen
  */
 public class ChaosData {
 	public static ChaosData current;
@@ -33,6 +34,9 @@ public class ChaosData {
 	private Vector<Double[]> cxVector;
 	private Vector<Double[]> cyVector;
 	
+	/**
+	 * Data before editing.
+	 */
 	private ChaosData origin;
 	private boolean changed;
 	
@@ -47,10 +51,20 @@ public class ChaosData {
 		this.origin = origin;
 	}
 	
+	/**
+	 * Constructs a new ChaosData with all parameters.
+	 * 
+	 * @param dist
+	 * @param cx
+	 * @param cy
+	 */
 	public ChaosData(double[] dist, double[][] cx, double[][] cy) {
 		this(dist, cx, cy, new ChaosData(dist, cx, cy, null));
 	}
 	
+	/**
+	 * The default constructor for ChaosData.
+	 */
 	public ChaosData() {
 		this(new double[1], new double[1][3], new double[1][3]);
 	}
@@ -79,6 +93,9 @@ public class ChaosData {
 		return cyVector;
 	}
 	
+	/**
+	 * Set this instance copy to {@link #origin}.
+	 */
 	public void setCurrentToOrigin() {
 		origin = new ChaosData(getDist(), getCX(), getCY(), null);
 	}
@@ -96,6 +113,13 @@ public class ChaosData {
 		}
 	}
 	
+	/**
+	 * Determines whether the file has been edited since it was opened.
+	 * If the data is edited back to its {@link #origin original state},
+	 * would be considered unedited.
+	 * 
+	 * @return {@code true} if data has been edited, {@code false} otherwise
+	 */
 	public boolean isChanged() {
 		return changed;
 	}
@@ -106,12 +130,22 @@ public class ChaosData {
 		cyVector.add(cy);
 	}
 	
+	/**
+	 * Add the default rule to data.
+	 */
 	public void addRule() {
 		Double[] cx = { 0.0, 0.0, 0.0 };
 		Double[] cy = { 0.0, 0.0, 0.0 };
 		addRule(0.0, cx, cy);
 	}
 	
+	/**
+	 * Removes the rule at the specified position in this ChaosData.
+	 * 
+	 * @param index the index of the rule to be removed
+	 * @throws ArrayIndexOutOfBoundsException if the index is out of range
+	 *         ({@code index < 0 || index >= The number of rules})
+	 */
 	public void removeRule(int index) {
 		distVector.remove(index);
 		cxVector.remove(index);

@@ -28,8 +28,9 @@ import io.tatlook.chaos.ChaosData;
 import io.tatlook.chaos.ChaosFileDataException;
 
 /**
- * @author Administrator
- *
+ * The parent class of all file parsers.
+ * 
+ * @author YouZhe Zhen
  */
 public abstract class AbstractFileParser {
 	protected static AbstractFileParser currentFileParser;
@@ -39,6 +40,12 @@ public abstract class AbstractFileParser {
 	protected FileInputStream inputStream;
 	protected ChaosData data;
 	
+	/**
+	 * Constructs a new file parser with the target file.
+	 * 
+	 * @param file
+	 * @throws FileNotFoundException
+	 */
 	public AbstractFileParser(File file) throws FileNotFoundException {
 		chaosFile = file;
 		inputStream = new FileInputStream(file);
@@ -47,11 +54,26 @@ public abstract class AbstractFileParser {
 		currentFileParser = this;
 	}
 	
+	/**
+	 * A way for {@link NullFileParser}
+	 */
 	protected AbstractFileParser() {
 	}
 	
+	/**
+	 * Key file parsing steps.
+	 * During this process, {@link ChaosData#current} will be updated.
+	 *
+	 * @throws ChaosFileDataException the file format is incorrect
+	 */
 	public abstract void parse() throws ChaosFileDataException;
 	
+	/**
+	 * Returns the target file of this file parser.
+	 * 
+	 * @return the target file of this {@code AbstractFileParser} instance
+	 *          (which may be {@code null}).
+	 */
 	public File getFile() {
 		return chaosFile;
 	}

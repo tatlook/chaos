@@ -32,13 +32,19 @@ import io.tatlook.chaos.ErrorMessageDialog;
 import io.tatlook.chaos.FileHistoryManager;
 
 /**
- * @author Administrator
- *
+ * The parent class of all file savers.
+ * 
+ * @author YouZhe Zhen
  */
 public abstract class AbstractFileSaver {
 	protected PrintStream out;
 	protected File file;
 	
+	/**
+	 * Constructs a new file saver with the target file.
+	 * 
+	 * @param file
+	 */
 	public AbstractFileSaver(File file) {
 		this.file = file;
 		try {
@@ -54,6 +60,10 @@ public abstract class AbstractFileSaver {
 		}
 	}
 	
+	/**
+	 * Key file saving steps.
+	 * The data is provided by {@link ChaosData#current}
+	 */
 	public abstract void save();
 	
 	/**

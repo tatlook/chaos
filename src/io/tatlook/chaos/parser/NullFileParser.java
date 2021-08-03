@@ -23,14 +23,26 @@ import java.io.File;
 import io.tatlook.chaos.ChaosData;
 
 /**
- * @author Administrator
- *
+ * Null object of AbstractFileParser.
+ * This doesn't actually parse any files, 
+ * but {@link ChaosData#current} will still update
+ * to the empty {@code ChaosData} when {@link #parse} is called.
+ * 
+ * @author YouZhe Zhen
  */
 public class NullFileParser extends AbstractFileParser {
+	/**
+	 * Constructs a new NullFileParser.
+	 */
 	public NullFileParser() {
 		currentFileParser = this;
 	}
 	
+	/**
+	 * Set {@link ChaosData#current} to the default {@code ChaosData}
+	 * 
+	 * @see ChaosData#ChaosData()
+	 */
 	@Override
 	public void parse() {
 		data = new ChaosData();
