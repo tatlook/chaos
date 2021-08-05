@@ -42,7 +42,7 @@ public class FractintFileParser extends AbstractFileParser {
 		} else if (scanner.hasNextDouble()) {
 			return scanner.nextDouble();
 		} else {
-			throw new ChaosFileDataException(chaosFile);
+			throw new ChaosFileDataException(file);
 		}
 	}
 	
@@ -92,14 +92,14 @@ public class FractintFileParser extends AbstractFileParser {
 				if (c == '{') {
 					break;
 				} else if (c == -1) {
-					throw new ChaosFileDataException(chaosFile);
+					throw new ChaosFileDataException(file);
 				}
 			}
 			// hypää nykyinen rivi ohi
 			if (scanner.hasNextLine()) {
 				scanner.nextLine();
 			} else {
-				throw new ChaosFileDataException(chaosFile);
+				throw new ChaosFileDataException(file);
 			}
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();

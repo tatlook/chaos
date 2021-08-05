@@ -105,16 +105,16 @@ public class ChaosFileParser extends AbstractFileParser {
 	
 	private double[] readDouble1D() throws ChaosFileDataException {
 		if (!scanner.hasNextInt()) {
-			throw new ChaosFileDataException(chaosFile);
+			throw new ChaosFileDataException(file);
 		}
 		int n = scanner.nextInt();
 		if (n <= 0) {
-			throw new ChaosFileDataException(chaosFile);
+			throw new ChaosFileDataException(file);
 		}
 		double[] a = new double[n];
 		for (int i = 0; i < n; i++) {
 			if (!scanner.hasNextDouble()) {
-				throw new ChaosFileDataException(chaosFile);
+				throw new ChaosFileDataException(file);
 			}
 			a[i] = scanner.nextDouble();
 		}
@@ -123,22 +123,22 @@ public class ChaosFileParser extends AbstractFileParser {
 	
 	private double[][] readDouble2D() throws ChaosFileDataException {
 		if (!scanner.hasNextInt()) {
-			throw new ChaosFileDataException(chaosFile);
+			throw new ChaosFileDataException(file);
 		}
 		int m = scanner.nextInt();
 		if (!scanner.hasNextInt()) {
-			throw new ChaosFileDataException(chaosFile);
+			throw new ChaosFileDataException(file);
 		}
 		int n = scanner.nextInt();
 		if (n != 3 || m <= 0) {
-			throw new ChaosFileDataException(chaosFile);
+			throw new ChaosFileDataException(file);
 		}
 		System.out.println("m=" + m + ";n=" + n);
 		double[][] a = new double[m][n];
 		for (int i = 0; i < m; i++) {
 			for (int j = 0; j < n; j++) {
 				if (!scanner.hasNextDouble()) {
-					throw new ChaosFileDataException(chaosFile);
+					throw new ChaosFileDataException(file);
 				}
 				a[i][j] = scanner.nextDouble();
 				System.out.println("a[" + i + "][" + j + "]=" + a[i][j]);
