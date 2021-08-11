@@ -27,16 +27,15 @@ import io.tatlook.chaos.ChaosData;
  *
  */
 public class FractintFileSaver extends AbstractFileSaver {
-
-	public FractintFileSaver(File file) {
-		super(file);
+	public FractintFileSaver(File file, ChaosData data) {
+		super(file, data);
 	}
 
 	@Override
 	public void save() {
-		double[] dist = ChaosData.current.getDist();
-		double[][] cx = ChaosData.current.getCX();
-		double[][] cy = ChaosData.current.getCY();
+		double[] dist = data.getDist();
+		double[][] cx = data.getCX();
+		double[][] cy = data.getCY();
 		
 		out.println(getFileNameNoEx(file.getName()) + " {");
 		for (int i = 0; i < dist.length; i++) {

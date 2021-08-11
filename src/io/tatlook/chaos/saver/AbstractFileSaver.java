@@ -39,14 +39,17 @@ import io.tatlook.chaos.FileHistoryManager;
 public abstract class AbstractFileSaver {
 	protected PrintStream out;
 	protected File file;
+	protected ChaosData data;
 	
 	/**
 	 * Constructs a new file saver with the target file.
 	 * 
-	 * @param file
+	 * @param file the target file
+	 * @param data the data to output to the target file
 	 */
-	public AbstractFileSaver(File file) {
+	public AbstractFileSaver(File file, ChaosData data) {
 		this.file = file;
+		this.data = data;
 		try {
 			if (file == null) {
 				throw new AssertionError();
@@ -62,7 +65,7 @@ public abstract class AbstractFileSaver {
 	
 	/**
 	 * Key file saving steps.
-	 * The data is provided by {@link ChaosData#current}
+	 * The data is provided by {@link #data}
 	 */
 	public abstract void save();
 	
@@ -80,11 +83,11 @@ public abstract class AbstractFileSaver {
 		AbstractFileSaver saver;
 		switch (getFileExtension(file)) {
 			case "ifs":
-				saver = new FractintFileSaver(file);
+				saver = new FractintFileSaver(file, ChaosData.current);
 				break;
 			case "ch":
 			default: 
-				saver = new ChaosFileSaver(file);
+				saver = new ChaosFileSaver(file,  ChaosData.current);
 				break;
 		};
 		saver.save();

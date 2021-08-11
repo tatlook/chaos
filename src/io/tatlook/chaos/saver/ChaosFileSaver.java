@@ -26,15 +26,15 @@ import io.tatlook.chaos.ChaosData;
  *
  */
 public class ChaosFileSaver extends AbstractFileSaver {
-	public ChaosFileSaver(File file) {
-		super(file);
+	public ChaosFileSaver(File file, ChaosData data) {
+		super(file, data);
 	}
 	
 	@Override
 	public void save() {
-		double[] dist = ChaosData.current.getDist();
-		double[][] cx = ChaosData.current.getCX();
-		double[][] cy = ChaosData.current.getCY();
+		double[] dist = data.getDist();
+		double[][] cx = data.getCX();
+		double[][] cy = data.getCY();
 		
 		out.println(dist.length);
 		out.print("    ");
