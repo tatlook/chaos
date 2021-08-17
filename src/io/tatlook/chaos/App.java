@@ -40,10 +40,7 @@ public class App {
 					FileHistoryManager.get().add(file);
 				} else {
 					if (args[0].charAt(0) == '-') {
-						JOptionPane.showMessageDialog(
-								mainWindow,
-								"This program doesn't have command-line options"
-						);
+						ErrorMessageDialog.createFailureOptionDialog();
 						new NullFileParser();
 					} else {
 						// = Throw new FileNotFoundException.
