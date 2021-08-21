@@ -171,7 +171,7 @@ public class Drawer extends JComponent implements Runnable {
 				}
 				int moveX = lastX - e.getX();
 				int moveY = lastY - e.getY();
-				if (Math.abs(moveX) > 50 || Math.abs(moveY) > 50) {
+				if (Math.abs(moveX) > 100 || Math.abs(moveY) > 100) {
 					lastX = e.getX();
 					lastY = e.getY();
 					return;
