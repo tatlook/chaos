@@ -92,7 +92,7 @@ public abstract class AbstractFileSaver {
 		};
 		saver.save();
 		ChaosData.current.setCurrentToOrigin();
-		ChaosData.current.setChanged(false);
+		ChaosData.current.checkChanged();
 		
 		FileHistoryManager.get().add(file);
 		App.setCurrentFile(file);

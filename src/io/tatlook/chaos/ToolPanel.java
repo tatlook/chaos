@@ -168,7 +168,7 @@ public class ToolPanel extends JPanel {
 							return;
 						}
 						App.mainWindow.getDrawer().setChange();
-						ChaosData.current.setChanged(true);
+						ChaosData.current.checkChanged();
 					}
 				});
 			}
@@ -201,7 +201,7 @@ public class ToolPanel extends JPanel {
 					contentBox.updateUI();
 					
 					App.mainWindow.getDrawer().setChange();
-					ChaosData.current.setChanged(true);
+					ChaosData.current.checkChanged();
 				});
 				
 				Box box = Box.createHorizontalBox();
@@ -378,7 +378,7 @@ public class ToolPanel extends JPanel {
 		if (itIsNew) {
 			ChaosData.current.addRule();
 			App.mainWindow.getDrawer().setChange();
-			ChaosData.current.setChanged(true);
+			ChaosData.current.checkChanged();
 		}
 		
 		RulePanel panel = new RulePanel();

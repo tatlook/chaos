@@ -98,15 +98,10 @@ public class ChaosData {
 		origin = new ChaosData(getDist(), getCX(), getCY(), null);
 	}
 	
-	public void setChanged(boolean changed) {
-		boolean thischanged = this.changed;
-		if (changed == true) {
-			if (equals(origin)) {
-				changed = false;
-			}
-		}
-		this.changed = changed;
-		if (thischanged != changed) {
+	public void checkChanged() {
+		boolean tmpchanged = changed;
+		changed = !equals(origin);
+		if (tmpchanged != changed) {
 			App.mainWindow.updateTitle();
 		}
 	}
