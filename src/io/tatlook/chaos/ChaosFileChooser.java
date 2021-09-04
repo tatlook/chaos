@@ -100,6 +100,7 @@ public class ChaosFileChooser {
 			e.openDialog();
 		}
 		
+		App.setCurrentFile(file);
 		App.mainWindow.updateToolPanel();
 		App.mainWindow.getDrawer().setChange();
 		

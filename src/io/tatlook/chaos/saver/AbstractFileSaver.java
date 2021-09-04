@@ -95,7 +95,8 @@ public abstract class AbstractFileSaver {
 		ChaosData.current.setChanged(false);
 		
 		FileHistoryManager.get().add(file);
-		App.mainWindow.setTitle(file);
+		App.setCurrentFile(file);
+		App.mainWindow.updateTitle();
 		
 		return true;
 	}

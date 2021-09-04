@@ -35,7 +35,6 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
 
-import io.tatlook.chaos.parser.AbstractFileParser;
 import io.tatlook.chaos.saver.AbstractFileSaver;
 
 /**
@@ -122,10 +121,11 @@ public class MainWindow extends JFrame {
 	public void updateToolPanel() {
 		toolPanel = new ToolPanel();
 		splitPane.setLeftComponent(toolPanel);
-		setTitle(AbstractFileParser.getCurrentFileParser().getFile());
+		updateTitle();
 	}
 	
-	public void setTitle(File file) {
+	public void updateTitle() {
+		File file = App.getCurrentFile();
 		String fileName = file != null ? file.getName() : "untitled";
 		if (ChaosData.current.isChanged()) {
 			super.setTitle("*" + fileName + " - " + NAME);

@@ -21,8 +21,6 @@ package io.tatlook.chaos;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import javax.swing.JOptionPane;
-
 import io.tatlook.chaos.parser.AbstractFileParser;
 import io.tatlook.chaos.parser.ChaosFileParser;
 import io.tatlook.chaos.parser.NullFileParser;
@@ -61,8 +59,20 @@ public class App {
 			e.openDialog();
 		}
 		
+		setCurrentFile(AbstractFileParser.getCurrentFileParser().getFile());
 		mainWindow.UI();
 		mainWindow.setVisible(true);
 		mainWindow.getDrawer().start();
-	} 
+	}
+
+	private static File currentFile;
+
+	public static File getCurrentFile() {
+		return currentFile;
+	}
+
+	public static void setCurrentFile(File file) {
+		currentFile = file;
+	}
+
 }

@@ -20,8 +20,6 @@ package io.tatlook.chaos;
 
 import java.util.Vector;
 
-import io.tatlook.chaos.parser.AbstractFileParser;
-
 /**
  * Data of iterated function system.
  * 
@@ -109,7 +107,7 @@ public class ChaosData {
 		}
 		this.changed = changed;
 		if (thischanged != changed) {
-			App.mainWindow.setTitle(AbstractFileParser.getCurrentFileParser().getFile());
+			App.mainWindow.updateTitle();
 		}
 	}
 	
