@@ -103,7 +103,7 @@ public class ChaosData {
 	public void setChanged(boolean changed) {
 		boolean thischanged = this.changed;
 		if (changed == true) {
-			if (equalsToOrigin()) {
+			if (equals(origin)) {
 				changed = false;
 			}
 		}
@@ -191,7 +191,14 @@ public class ChaosData {
 		return vector;
 	}
 	
-	private boolean equalsToOrigin() {
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (!(obj instanceof ChaosData)) {
+			return false;
+		}
 		if (!distVector.equals(origin.distVector)) {
 			return false;
 		}
