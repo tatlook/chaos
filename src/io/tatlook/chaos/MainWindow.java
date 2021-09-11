@@ -35,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
 
+import static io.tatlook.chaos.App.s;
 import io.tatlook.chaos.saver.AbstractFileSaver;
 
 /**
@@ -48,7 +49,7 @@ public class MainWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 8480434536614023106L;
 	
-	private static final String NAME = "Iterated Function System";
+	private static final String NAME = s("window.name");
 	
 
 	public MainWindow() {
@@ -126,7 +127,7 @@ public class MainWindow extends JFrame {
 	
 	public void updateTitle() {
 		File file = App.getCurrentFile();
-		String fileName = file != null ? file.getName() : "untitled";
+		String fileName = file != null ? file.getName() : s("window.untitled");
 		if (ChaosData.current.isChanged()) {
 			super.setTitle("*" + fileName + " - " + NAME);
 		} else {

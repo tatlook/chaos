@@ -50,6 +50,8 @@ import javax.swing.undo.UndoManager;
 
 import java.util.Vector;
 
+import static io.tatlook.chaos.App.s;
+
 /**
  * @author Administrator
  *
@@ -69,7 +71,7 @@ public class ToolPanel extends JPanel {
 	
 	private Box contentBox;
 	private Vector<RulePanel> rulePanels;
-	private JButton createRuleButton = new JButton("Create a Rule");
+	private JButton createRuleButton = new JButton(s("toolpanel.create_rule"));
 	private JPanel createRulePanel = new JPanel();
 	
 	public ToolPanel() {
@@ -99,7 +101,7 @@ public class ToolPanel extends JPanel {
 	
 	private void createSpeedControl() {
 		JPanel speedControlPanel = new JPanel();
-		speedControlPanel.setBorder(BorderFactory.createTitledBorder("Speed"));
+		speedControlPanel.setBorder(BorderFactory.createTitledBorder(s("toolpanel.speed")));
 		speedControlPanel.setMaximumSize(new Dimension(speedControlPanel.getMaximumSize().width, 90));
 		
 		JSlider slider = new JSlider(0, 10);
@@ -205,7 +207,7 @@ public class ToolPanel extends JPanel {
 				});
 				
 				Box box = Box.createHorizontalBox();
-				box.add(new JLabel("Possibility"));
+				box.add(new JLabel(s("toolpanel.possibility")));
 				box.add(createSpacing());
 				box.add(new EditTextField("" + ChaosData.current.getDist()[panelIndex], (value) -> {
 					Double value2 = Double.valueOf(value);
@@ -252,8 +254,8 @@ public class ToolPanel extends JPanel {
 		private void addListeners(JTextField field) {
 			UndoManager manager = new UndoManager();
 			
-			JMenuItem undoMenuItem = new JMenuItem("Undo    (Ctrl+Z)");
-			JMenuItem redoMenuItem = new JMenuItem("Redo    (Ctrl+Y)");
+			JMenuItem undoMenuItem = new JMenuItem(s("editf.undo"));
+			JMenuItem redoMenuItem = new JMenuItem(s("editf.redo"));
 			field.getDocument().addUndoableEditListener((e) -> {
 				manager.undoableEditHappened(e);
 				undoMenuItem.setEnabled(manager.canUndo());
@@ -324,9 +326,9 @@ public class ToolPanel extends JPanel {
 			field.addMouseListener(new MouseAdapter() {
 				JPopupMenu popupMenu = new JPopupMenu();
 				
-				JMenuItem copyMenuItem = new JMenuItem("Copy   (Ctrl+C)");
-				JMenuItem pasteMenuItem = new JMenuItem("Paste (Ctrl+V)");
-				JMenuItem cutMenuItem = new JMenuItem("Cut      (Ctrl+X)");
+				JMenuItem copyMenuItem = new JMenuItem(s("editf.copy"));
+				JMenuItem pasteMenuItem = new JMenuItem(s("editf.paste"));
+				JMenuItem cutMenuItem = new JMenuItem(s("editf.cut"));
 				
 				{
 					undoMenuItem.setEnabled(manager.canUndo());
@@ -363,7 +365,7 @@ public class ToolPanel extends JPanel {
 		public void updateUI() {
 			super.updateUI();
 			setMaximumSize(new Dimension(getMaximumSize().width, 110));
-			border = BorderFactory.createTitledBorder("Rule " + (panelIndex + 1));
+			border = BorderFactory.createTitledBorder(s("toolpanel.rule", (panelIndex + 1)));
 			setBorder(border);
 			if (deleteButton == null) {
 				deleteButton = new JButton("✕");

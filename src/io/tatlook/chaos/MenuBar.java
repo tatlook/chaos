@@ -34,6 +34,7 @@ import javax.swing.JMenuItem;
 import io.tatlook.chaos.MainWindow.MainWindowListener;
 import io.tatlook.chaos.parser.NullFileParser;
 import io.tatlook.chaos.saver.AbstractFileSaver;
+import static io.tatlook.chaos.App.s;
 
 /**
  * @author Administrator
@@ -47,18 +48,18 @@ public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = -7347092499428362250L;
 	
 	public MenuBar() {
-		JMenu fileMenu = new JMenu("File");
-		JMenu viewMenu = new JMenu("View");
+		JMenu fileMenu = new JMenu(s("menu.file"));
+		JMenu viewMenu = new JMenu(s("menu.view"));
 		
 		fileMenu.setMnemonic('F');
 		viewMenu.setMnemonic('V');
 		
-		JMenuItem newMenuItem = new JMenuItem("New");
-		JMenuItem saveMenuItem = new JMenuItem("Save");
-		JMenuItem openMenuItem = new JMenuItem("Open");
+		JMenuItem newMenuItem = new JMenuItem(s("menu.new"));
+		JMenuItem saveMenuItem = new JMenuItem(s("menu.save"));
+		JMenuItem openMenuItem = new JMenuItem(s("menu.open"));
 		JMenu openRecentMenu = FileHistoryManager.get().getMenu();
-		JMenuItem saveImageMenuItem = new JMenuItem("Save Image");
-		JMenuItem exitMenuItem = new JMenuItem("Exit");
+		JMenuItem saveImageMenuItem = new JMenuItem(s("menu.save_image"));
+		JMenuItem exitMenuItem = new JMenuItem(s("menu.exit"));
 		newMenuItem.setMnemonic('N');
 		saveMenuItem.setMnemonic('S');
 		openMenuItem.setMnemonic('O');
@@ -130,11 +131,11 @@ public class MenuBar extends JMenuBar {
 			mainWindowListener.windowClosed(App.mainWindow);
 		});
 		
-		JMenuItem cleanImageMenuItem = new JMenuItem("Clean Display");
-		JMenuItem intoMiddleMenuItem = new JMenuItem("Into the Middle");
-		JMenuItem chooseColorMenuItem = new JMenuItem("Select Color");
-		JMenuItem imageConfigurationMenuItem = new JMenuItem("Image Configuration");
-		JMenuItem fullScreenMenuItem = new JMenuItem("Full Screen (F11)");
+		JMenuItem cleanImageMenuItem = new JMenuItem(s("menu.clean_display"));
+		JMenuItem intoMiddleMenuItem = new JMenuItem(s("menu.into_middle"));
+		JMenuItem chooseColorMenuItem = new JMenuItem(s("menu.select_color"));
+		JMenuItem imageConfigurationMenuItem = new JMenuItem(s("menu.image_config"));
+		JMenuItem fullScreenMenuItem = new JMenuItem(s("menu.full_screen"));
 		cleanImageMenuItem.setMnemonic('C');
 		intoMiddleMenuItem.setMnemonic('M');
 		chooseColorMenuItem.setMnemonic('O');
